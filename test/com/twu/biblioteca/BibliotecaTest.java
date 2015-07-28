@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,20 +11,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BibliotecaTest {
+    @BeforeClass
+    public static void setUp() throws Exception {
+        Biblioteca.fillBibliotecaWithBooks();
+    }
 
     @Test
     public void should_list_all_books() throws Exception {
-        Biblioteca.fillBibliotecaWithBooks();
         List<Book> allBooks = getAllBooks();
         assertEquals(6, allBooks.size());
     }
 
     @Test
     public void should_list_all_available_books() throws Exception {
-        Biblioteca.fillBibliotecaWithBooks();
         Customer guest = new Customer("guest");
-        assertTrue(guest.checkout("Agile Game Development with Scrum"));
+        String title = "Agile Game Development with Scrum";
+        assertTrue(guest.checkout(title));
         assertEquals(5, Biblioteca.getAllAvailableBooks().size());
-        assertTrue(guest.returnBook("Agile Game Development with Scrum"));
+        assertTrue(guest.returnBook(title));
     }
 }
