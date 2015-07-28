@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public class Biblioteca {
     private static final List<Book> bookCollection = new ArrayList<Book>();
 
     public static List<Book> getAllBooks() {
-        return bookCollection;
+        return Collections.unmodifiableList(bookCollection);
     }
 
     public static void fillBibliotecaWithBooks() {
