@@ -11,17 +11,17 @@ public class Biblioteca {
 
     private static final List<Book> bookCollection = new ArrayList<Book>();
 
-    public static List<Book> getAllBooks() {
-        return Collections.unmodifiableList(bookCollection);
-    }
-
-    public static void fillBibliotecaWithBooks() {
+    static {
         bookCollection.add(new Book("Agile Game Development with Scrum", "Clinton Keith", 2010));
         bookCollection.add(new Book("Agile Project Management with Scrum", "Ken Schwaber", 2004));
         bookCollection.add(new Book("Pro Agile .NET Development with SCRUM", "Scott Millett, Jerrel Blankenship, Matthew Bussa", 2011));
         bookCollection.add(new Book("Scrum and XP from the Trenches: How We Do Scrum", "Henrik Kniberg", 2007));
         bookCollection.add(new Book("A Practical Guide to Distributed Scrum", "Elizabeth Woodward, Steffan Surdek, Matthew Ganis ", 2010));
         bookCollection.add(new Book("Succeeding with Agile: Software Development Using Scrum", "Mike Cohn ", 2010));
+    }
+
+    public static List<Book> getAllBooks() {
+        return Collections.unmodifiableList(bookCollection);
     }
 
     public static List<Book> getAllAvailableBooks() {
@@ -32,5 +32,12 @@ public class Biblioteca {
 
     public static Book getBook(String bookTitle) {
         return bookCollection.stream().filter(book->book.getTitle().equals(bookTitle)).findFirst().get();
+    }
+
+    public static String getAllBooksNames() {
+        StringBuffer names= new StringBuffer();
+        bookCollection.stream().forEach((book) -> {
+            names.append(book.getTitle()).append(", ");});
+        return names.replace(names.length()-2, names.length(), "").toString();
     }
 }

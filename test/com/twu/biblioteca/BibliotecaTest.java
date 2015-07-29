@@ -1,33 +1,25 @@
 package com.twu.biblioteca;
 
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
 
 import static com.twu.biblioteca.Biblioteca.getAllBooks;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class BibliotecaTest {
 
     private final String bookTitle = "Agile Game Development with Scrum";
 
-    @BeforeClass
-    public static void setUp() throws Exception {
-        Biblioteca.fillBibliotecaWithBooks();
-    }
-
     @Test
-    public void should_list_all_books() throws Exception {
+    public void should_get_all_books() throws Exception {
         List<Book> allBooks = getAllBooks();
         assertEquals(6, allBooks.size());
     }
 
     @Test
-    public void should_list_all_available_books() throws Exception {
+    public void should_get_all_available_books() throws Exception {
         Customer guest = new Customer("guest");
         assertTrue(guest.checkout(bookTitle));
         assertEquals(5, Biblioteca.getAllAvailableBooks().size());
@@ -45,8 +37,9 @@ public class BibliotecaTest {
     public void should_each_book_contain_detail_info() throws Exception {
         List<Book> allAvailableBooks = Biblioteca.getAllAvailableBooks();
         allAvailableBooks.stream().forEach((book)
-                ->{ assertNotNull(book.getAuthor());
-                    assertNotNull(book.getPublishedYear());
-                });
+                -> {
+            assertNotNull(book.getAuthor());
+            assertNotNull(book.getPublishedYear());
+        });
     }
 }
