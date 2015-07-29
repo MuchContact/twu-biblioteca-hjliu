@@ -18,6 +18,9 @@ public class BibliotecaApp {
         System.out.println("Operation Options: ");
         System.out.println("    1: List Books");
         System.out.println("(Notes: )");
+
+        Customer guest = new Customer("guest");
+
         while(true){
             String next = in.nextLine();
             if(next.trim().equalsIgnoreCase("List Books")){
@@ -25,6 +28,26 @@ public class BibliotecaApp {
                 List<Book> tmp = Biblioteca.getAllBooks();
                 tmp.stream().forEach((book) -> {
                     System.out.println(book.getTitle());});
+                continue;
+            }
+            if(next.trim().contains("checkout")){
+                int bookIndex = Integer.valueOf(next.trim().substring(8).trim());
+                Book book = Biblioteca.getBookByIndex(bookIndex);
+                if(guest.checkout(book.getTitle())){
+                    System.out.println("Thank you! Enjoy the book");
+                }else{
+                    System.out.println("That book is not available.");
+                }
+                continue;
+            }
+            if(next.trim().contains("return")){
+                int bookIndex = Integer.valueOf(next.trim().substring(6).trim());
+                Book book = Biblioteca.getBookByIndex(bookIndex);
+                if(guest.returnBook(book.getTitle())){
+                    System.out.println("Thank you for returning the book.");
+                }else{
+                    System.out.println("That is not a valid book to return.");
+                }
                 continue;
             }
             if(next.trim().equalsIgnoreCase("Quit")){

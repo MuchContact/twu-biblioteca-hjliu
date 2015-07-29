@@ -40,4 +40,8 @@ public class Biblioteca {
             names.append(book.getTitle()).append(", ");});
         return names.replace(names.length()-2, names.length(), "").toString();
     }
+
+    public static Book getBookByIndex(int index) {
+        return bookCollection.get(index-1);
+    }
 }
