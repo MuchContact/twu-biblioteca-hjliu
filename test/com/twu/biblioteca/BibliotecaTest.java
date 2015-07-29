@@ -30,4 +30,11 @@ public class BibliotecaTest {
         assertEquals(5, Biblioteca.getAllAvailableBooks().size());
         assertTrue(guest.returnBook(title));
     }
+
+    @Test
+    public void should_contain_detail_info() throws Exception {
+        Book book = Biblioteca.getBook("Agile Game Development with Scrum");
+        assertEquals("Clinton Keith", book.getAuthor());
+        assertEquals(2010, book.getPublishedYear());
+    }
 }
