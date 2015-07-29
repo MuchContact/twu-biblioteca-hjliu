@@ -6,38 +6,27 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Biblioteca!");
-        System.out.println("");
-        System.out.println("All books are as follows:");
-        List<Book> bookList = Biblioteca.getAllBooks();
-        final int[] index = {1};
-        bookList.stream().forEach((book) -> {
-            System.out.println(index[0] + ". " + book.getTitle());
-            index[0]++;});
+        printWelcome();
+        printAllBooksInConsole();
         Scanner in = new Scanner(System.in);
-        System.out.println("Operation Options: ");
-        System.out.println("    1: List Books");
-        System.out.println("(Notes: )");
+        printOperationInstructions();
 
         Customer guest = new Customer("guest");
 
         while(true){
-            String next = in.nextLine();
-            if(next.trim().equalsIgnoreCase("List Books")){
-                System.out.println("All books are as follows:");
-                List<Book> tmp = Biblioteca.getAllBooks();
-                tmp.stream().forEach((book) -> {
-                    System.out.println(book.getTitle());});
+            String cmd = in.nextLine();
+            if(isValidListBooksCmd(cmd)){
+                printAllBooksInConsole();
                 continue;
             }
-            if(next.trim().contains("show detail for")){
-                int bookIndex = Integer.valueOf(next.trim().substring(15).trim());
+            if(isValidShowBookDetailCmd(cmd)){
+                int bookIndex = Integer.valueOf(cmd.trim().substring(15).trim());
                 Book book = Biblioteca.getBookByIndex(bookIndex);
                 System.out.println(book);
                 continue;
             }
-            if(next.trim().contains("checkout")){
-                int bookIndex = Integer.valueOf(next.trim().substring(8).trim());
+            if(isValidCheckoutCmd(cmd)){
+                int bookIndex = Integer.valueOf(cmd.trim().substring(8).trim());
                 Book book = Biblioteca.getBookByIndex(bookIndex);
                 if(guest.checkout(book.getTitle())) {
                     System.out.println("Thank you! Enjoy the book");
@@ -46,8 +35,8 @@ public class BibliotecaApp {
                 }
                 continue;
             }
-            if(next.trim().contains("return")){
-                int bookIndex = Integer.valueOf(next.trim().substring(6).trim());
+            if(isValidReturnBookCmd(cmd)){
+                int bookIndex = Integer.valueOf(cmd.trim().substring(6).trim());
                 Book book = Biblioteca.getBookByIndex(bookIndex);
                 if(guest.returnBook(book.getTitle())) {
                     System.out.println("Thank you for returning the book.");
@@ -56,13 +45,53 @@ public class BibliotecaApp {
                 }
                 continue;
             }
-            if(next.trim().equalsIgnoreCase("Quit")){
+            if(isValidQuitAppCmd(cmd)){
                 break;
             }
 
-                System.out.println("Select a valid option!");
+            System.out.println("Select a valid option!");
         }
 
+    }
+
+    private static boolean isValidQuitAppCmd(String cmd) {
+        return cmd.trim().equalsIgnoreCase("Quit");
+    }
+
+    private static boolean isValidReturnBookCmd(String cmd) {
+        return cmd.trim().contains("return");
+    }
+
+    private static boolean isValidCheckoutCmd(String cmd) {
+        return cmd.trim().contains("checkout");
+    }
+
+    private static boolean isValidShowBookDetailCmd(String cmd) {
+        return cmd.trim().contains("show detail for");
+    }
+
+    private static boolean isValidListBooksCmd(String cmd) {
+        return cmd.trim().equalsIgnoreCase("List Books");
+    }
+
+    private static void printOperationInstructions() {
+        System.out.println("Operation Options: ");
+        System.out.println("    1: List Books");
+        System.out.println("(Notes: )");
+    }
+
+    private static void printWelcome() {
+        System.out.println("Welcome to Biblioteca!");
+        System.out.println("");
+    }
+
+    private static void printAllBooksInConsole() {
+        System.out.println("All books are as follows:");
+        List<Book> bookList = Biblioteca.getAllBooks();
+        final int[] index = {1};
+        bookList.stream().forEach((book) -> {
+            System.out.println(index[0] + ". " + book.getTitle());
+            index[0]++;});
     }
 
 }
