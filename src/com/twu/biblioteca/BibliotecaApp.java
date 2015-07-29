@@ -12,7 +12,7 @@ public class BibliotecaApp {
         List<Book> bookList = Biblioteca.getAllBooks();
         final int[] index = {1};
         bookList.stream().forEach((book) -> {
-            System.out.println(index[0] +". "+book.getTitle());
+            System.out.println(index[0] + ". " + book.getTitle());
             index[0]++;});
         Scanner in = new Scanner(System.in);
         System.out.println("Operation Options: ");
@@ -30,12 +30,18 @@ public class BibliotecaApp {
                     System.out.println(book.getTitle());});
                 continue;
             }
+            if(next.trim().contains("show detail for")){
+                int bookIndex = Integer.valueOf(next.trim().substring(15).trim());
+                Book book = Biblioteca.getBookByIndex(bookIndex);
+                System.out.println(book);
+                continue;
+            }
             if(next.trim().contains("checkout")){
                 int bookIndex = Integer.valueOf(next.trim().substring(8).trim());
                 Book book = Biblioteca.getBookByIndex(bookIndex);
-                if(guest.checkout(book.getTitle())){
+                if(guest.checkout(book.getTitle())) {
                     System.out.println("Thank you! Enjoy the book");
-                }else{
+                } else {
                     System.out.println("That book is not available.");
                 }
                 continue;
@@ -43,9 +49,9 @@ public class BibliotecaApp {
             if(next.trim().contains("return")){
                 int bookIndex = Integer.valueOf(next.trim().substring(6).trim());
                 Book book = Biblioteca.getBookByIndex(bookIndex);
-                if(guest.returnBook(book.getTitle())){
+                if(guest.returnBook(book.getTitle())) {
                     System.out.println("Thank you for returning the book.");
-                }else{
+                } else {
                     System.out.println("That is not a valid book to return.");
                 }
                 continue;
@@ -54,7 +60,7 @@ public class BibliotecaApp {
                 break;
             }
 
-            System.out.println("Select a valid option!");
+                System.out.println("Select a valid option!");
         }
 
     }

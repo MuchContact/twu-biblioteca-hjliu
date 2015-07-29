@@ -49,4 +49,13 @@ public class Book {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publishedYear=" + publishedYear +
+                '}';
+    }
 }
