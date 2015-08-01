@@ -42,4 +42,11 @@ public class BibliotecaTest {
             assertNotNull(book.getPublishedYear());
         });
     }
+
+    @Test
+    public void should_get_all_movies() throws Exception {
+        List<Movie> allMovies = Biblioteca.getAllMovies();
+        assertEquals(4, allMovies.size());
+    }
+
 }
