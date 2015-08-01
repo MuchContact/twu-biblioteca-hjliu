@@ -19,4 +19,9 @@ public class Customer {
         Book book = Biblioteca.getBook(bookTitle);
         return book.return2Biblioteca(username);
     }
+
+    public boolean checkoutMovie(String name) {
+        Movie movie = Biblioteca.getMovie(name);
+        return movie.checkout(username);
+    }
 }

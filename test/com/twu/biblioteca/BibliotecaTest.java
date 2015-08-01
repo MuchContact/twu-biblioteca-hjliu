@@ -49,4 +49,10 @@ public class BibliotecaTest {
         assertEquals(4, allMovies.size());
     }
 
+    @Test
+    public void should_checkout_movie() throws Exception {
+        Customer guest = new Customer("guest");
+        String name = Biblioteca.getAllMovies().get(0).getName();
+        assertTrue(guest.checkoutMovie(name));
+    }
 }

@@ -46,4 +46,8 @@ public class Biblioteca {
     public static List<Movie> getAllMovies() {
         return Collections.unmodifiableList(movieCollection);
     }
+
+    public static Movie getMovie(String name) {
+        return movieCollection.stream().filter(movie->movie.getName().equals(name)).findFirst().get();
+    }
 }
