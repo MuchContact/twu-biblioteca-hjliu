@@ -3,13 +3,17 @@ package com.twu.biblioteca;
 /**
  * Created by dan on 15-8-1.
  */
-public class Movie {
+public class Movie extends Item{
     private String name;
     private int year;
     private String director;
-    private int movie_rating;
-    private boolean checkedOut = false;
-    private String occupant=null;
+    private int movie_rating = -1;
+
+    public Movie(String name, String director, int year) {
+        this.name = name;
+        this.director = director;
+        this.year = year;
+    }
 
     public Movie(String name, String director, int year, int rate) {
         this.name = name;
@@ -22,21 +26,13 @@ public class Movie {
         return name;
     }
 
-    public boolean checkout(String username) {
-        if(checkedOut){
-            return false;
-        }
-        checkedOut = true;
-        this.occupant = username;
-        return true;
-    }
-
-    public boolean return2Biblioteca(String username) {
-        if(this.occupant!=null && this.occupant.equals(username)){
-            checkedOut = false;
-            this.occupant = null;
-            return true;
-        }
-        return false;
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "name='" + name + '\'' +
+                ", year=" + year +
+                ", director='" + director + '\'' +
+                ", movie_rating=" + ((movie_rating>0)?movie_rating:"unrated") +
+                '}';
     }
 }
