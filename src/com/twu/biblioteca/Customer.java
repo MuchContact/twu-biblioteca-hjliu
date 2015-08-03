@@ -36,4 +36,9 @@ public class Customer {
     public boolean checkPsw(String password) {
         return psw.equals(password);
     }
+
+    public boolean returnMovie(String name) {
+        Movie movie = Biblioteca.getMovie(name);
+        return movie.return2Biblioteca(name);
+    }
 }

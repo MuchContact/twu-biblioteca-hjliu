@@ -73,7 +73,7 @@ public class BibliotecaApp {
             if(isValidReturnMovieCmd(cmd)){
                 int movieIndex = Integer.valueOf(cmd.trim().substring(RETURN_MOVIE.length()).trim());
                 Movie movie = Biblioteca.getMovieByIndex(movieIndex);
-                if(guest.returnBook(movie.getName())) {
+                if(guest.returnMovie(movie.getName())) {
                     System.out.println("Thank you for returning the movie.");
                 } else {
                     System.out.println("That is not a valid movie to return.");
